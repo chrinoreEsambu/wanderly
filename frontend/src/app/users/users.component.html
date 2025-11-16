@@ -1,0 +1,160 @@
+<div
+  class="w-full"
+  style="padding: 2rem 1rem; max-width: 1400px; margin: 0 auto"
+>
+  <!-- Header Section -->
+  <div class="flex flex-col gap-4 mb-4" style="margin-bottom: 2rem">
+    <div class="flex items-center justify-between flex-wrap" style="gap: 1rem">
+      <div>
+        <h1 class="text-3xl font-bold" style="margin-bottom: 0.5rem">
+          Gestion des utilisateurs
+        </h1>
+        <p class="text-muted-foreground">
+          Administrez les comptes utilisateurs de la plateforme
+        </p>
+      </div>
+      <button
+        (click)="adduser()"
+        class="btn-base btn-default btn-default-size"
+        title="Ajouter un utilisateur"
+      >
+        <i class="ri-user-add-line"></i>
+        Nouvel utilisateur
+      </button>
+    </div>
+  </div>
+
+  <!-- Users Grid -->
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    "
+  >
+    <div class="card hover-lift" *ngFor="let user of Listusers">
+      <div class="card-header" style="padding-bottom: 0">
+        <div class="flex items-center gap-3">
+          <!-- Avatar -->
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              overflow: hidden;
+              background: hsl(var(--muted));
+              flex-shrink: 0;
+            "
+          >
+            <img
+              [src]="'http://localhost:8763/user/files/' + user.photo"
+              [alt]="user.username"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+
+          <div style="flex: 1; min-width: 0">
+            <h3 class="card-title" style="margin-bottom: 0.25rem">
+              {{ user.username }}
+            </h3>
+            <span class="badge badge-secondary text-xs">{{ user.role }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-content" style="padding: 1.5rem">
+        <div style="display: flex; flex-direction: column; gap: 0.75rem">
+          <!-- Name -->
+          <div class="flex items-center gap-2 text-sm">
+            <i
+              class="ri-user-line"
+              style="color: hsl(var(--muted-foreground))"
+            ></i>
+            <span>{{ user.firstname }} {{ user.lastname }}</span>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-center gap-2 text-sm">
+            <i
+              class="ri-mail-line"
+              style="color: hsl(var(--muted-foreground))"
+            ></i>
+            <span style="word-break: break-all">{{ user.email }}</span>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-center gap-2 text-sm">
+            <i
+              class="ri-phone-line"
+              style="color: hsl(var(--muted-foreground))"
+            ></i>
+            <span>{{ user.phone }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div
+        class="card-footer"
+        style="
+          padding: 1rem 1.5rem;
+          border-top: 1px solid hsl(var(--border));
+          justify-content: flex-end;
+          gap: 0.5rem;
+        "
+      >
+        <button
+          (click)="viewuser(user.id)"
+          class="btn-base btn-outline btn-sm"
+          title="Voir le profil"
+          style="border: 1px solid black; outline: none; width: 70px"
+        >
+          <i class="ri-eye-line"></i>
+          Voir
+        </button>
+
+        <button
+          (click)="edituser(user.id)"
+          class="btn-base btn-ghost btn-sm"
+          title="Modifier"
+        >
+          <i class="ri-edit-line"></i>
+        </button>
+
+        <button
+          (click)="deleteuser(user.id)"
+          class="btn-base btn-ghost btn-sm text-red-600"
+          title="Supprimer"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div
+    *ngIf="!Listusers || Listusers.length === 0"
+    class="card"
+    style="padding: 4rem 2rem; text-align: center"
+  >
+    <i
+      class="ri-user-line"
+      style="
+        font-size: 3rem;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 1rem;
+      "
+    ></i>
+    <h3 class="text-xl font-semibold" style="margin-bottom: 0.5rem">
+      Aucun utilisateur trouvé
+    </h3>
+    <p class="text-muted-foreground" style="margin-bottom: 1.5rem">
+      Ajoutez votre premier utilisateur pour commencer
+    </p>
+    <button (click)="adduser()" class="btn-base btn-default btn-default-size">
+      <i class="ri-user-add-line"></i>
+      Nouvel utilisateur
+    </button>
+  </div>
+</div>

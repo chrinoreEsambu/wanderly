@@ -1,0 +1,158 @@
+<div class="login-container">
+  <button
+    id="theme-toggle-login"
+    class="theme-toggle-btn"
+    title="Changer le thème"
+  >
+    <i class="ri-sun-line" id="theme-icon-login"></i>
+  </button>
+
+  <div class="login-content">
+    <div class="login-form-section">
+      <div class="logo-section">
+        <i class="ri-bus-line logo-icon"></i>
+        <h3>BusTraveller</h3>
+      </div>
+
+      <div class="tabs">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'login'"
+          (click)="switchTab('login')"
+        >
+          Connexion
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'register'"
+          (click)="switchTab('register')"
+        >
+          Inscription
+        </button>
+      </div>
+
+      <div *ngIf="activeTab === 'login'">
+        <div class="header-section">
+          <h1>Bienvenue</h1>
+          <p>Connectez-vous à votre compte</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <div class="input-wrapper">
+              <i class="ri-user-line input-icon"></i>
+              <input
+                type="text"
+                id="username"
+                formControlName="username"
+                placeholder="Votre nom d'utilisateur"
+                class="input"
+                [class.error]="
+                  form.get('username')?.invalid && form.get('username')?.touched
+                "
+                autocomplete="username"
+              />
+            </div>
+            <span
+              *ngIf="
+                form.get('username')?.invalid && form.get('username')?.touched
+              "
+              class="error-message"
+            >
+              Le nom d'utilisateur est requis
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="ri-lock-line input-icon"></i>
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                placeholder="••••••••"
+                class="input"
+                [class.error]="
+                  form.get('password')?.invalid && form.get('password')?.touched
+                "
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="showPassword = !showPassword"
+              >
+                <i
+                  [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"
+                ></i>
+              </button>
+            </div>
+            <span
+              *ngIf="
+                form.get('password')?.invalid && form.get('password')?.touched
+              "
+              class="error-message"
+            >
+              Le mot de passe est requis
+            </span>
+          </div>
+
+          <div class="form-options">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" class="checkbox" />
+              <label for="remember">Se souvenir de moi</label>
+            </div>
+            <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-base btn-default btn-lg"
+            [disabled]="form.invalid || isLoading"
+            style="width: 100%"
+          >
+            <span *ngIf="!isLoading">Se connecter</span>
+            <span *ngIf="isLoading" class="loading-text">
+              <i class="ri-loader-4-line animate-spin"></i>
+              Connexion...
+            </span>
+          </button>
+        </form>
+
+        <div class="divider">
+          <span>Ou continuer avec</span>
+        </div>
+
+        <div class="social-login">
+          <button type="button" class="btn-base btn-outline">
+            <i class="ri-google-fill"></i>
+            Google
+          </button>
+          <button type="button" class="btn-base btn-outline">
+            <i class="ri-facebook-fill"></i>
+            Facebook
+          </button>
+        </div>
+
+        <div class="signup-link">
+          <p>
+            Vous n'avez pas de compte ?
+            <a href="/register">Créer un compte</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="login-image">
+        <img src="/img/bus.png" alt="Bus Travel" />
+        <div class="image-overlay">
+          <h2>Bienvenue sur BusTraveller</h2>
+          <p>Votre plateforme de voyage en bus de confiance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

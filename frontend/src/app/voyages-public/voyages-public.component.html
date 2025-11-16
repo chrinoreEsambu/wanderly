@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<div class="voyages-public-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Explorez nos destinations</h1>
+      <p>Découvrez les meilleurs voyages en bus à travers le monde</p>
+    </div>
+  </div>
+
+  <div class="voyages-content">
+    <div class="container">
+      <div *ngIf="isLoading" class="loading-state">
+        <i class="ri-loader-4-line animate-spin"></i>
+        <p>Chargement des voyages...</p>
+      </div>
+
+      <div *ngIf="!isLoading && voyages.length === 0" class="empty-state">
+        <i class="ri-bus-line"></i>
+        <h3>Aucun voyage disponible</h3>
+        <p>Revenez plus tard pour découvrir nos nouvelles destinations</p>
+      </div>
+
+      <div *ngIf="!isLoading && voyages.length > 0" class="voyages-grid">
+        <div *ngFor="let voyage of voyages" class="voyage-card">
+          <div class="voyage-image">
+            <img [src]="getPhotoUrl(voyage.photo)" [alt]="voyage.name" />
+            <div class="voyage-badge">
+              <i class="ri-map-pin-line"></i>
+              {{ voyage.category?.name || "Sans catégorie" }}
+            </div>
+          </div>
+
+          <div class="voyage-content">
+            <h3 class="voyage-title">{{ voyage.name }}</h3>
+
+            <div class="voyage-info">
+              <div class="info-item">
+                <i class="ri-calendar-line"></i>
+                <span>{{ voyage.date }}</span>
+              </div>
+            </div>
+
+            <button
+              class="btn-base btn-default btn-lg"
+              (click)="addToCart(voyage)"
+              style="width: 100%; margin-top: 1rem"
+            >
+              <i class="ri-shopping-cart-line"></i>
+              Ajouter au panier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,249 @@
+/* Calendrier des Voyages - Style PESAS */
+
+.calendar-page {
+  width: 100%;
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Page Header */
+.page-header {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0a0a0a;
+  margin-bottom: 4px;
+}
+
+.page-description {
+  font-size: 14px;
+  color: #737373;
+  margin: 0;
+}
+
+/* Calendar Card */
+.calendar-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 24px;
+  overflow: hidden;
+}
+
+/* FullCalendar - Style personnalisé PESAS */
+::ng-deep .fc {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+}
+
+::ng-deep .fc-toolbar-title {
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+::ng-deep .fc-button {
+  background: #171717 !important;
+  border: 1px solid #171717 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+  font-weight: 500;
+  text-transform: capitalize !important;
+  transition: all 150ms;
+}
+
+::ng-deep .fc-button:hover {
+  background: #0a0a0a !important;
+  border-color: #0a0a0a !important;
+}
+
+::ng-deep .fc-button-primary:not(:disabled):active,
+::ng-deep .fc-button-primary:not(:disabled).fc-button-active {
+  background: #0a0a0a !important;
+  border-color: #0a0a0a !important;
+}
+
+::ng-deep .fc-daygrid-day-number {
+  padding: 0.5rem;
+  font-weight: 500;
+  color: #0a0a0a;
+}
+
+::ng-deep .fc-daygrid-day.fc-day-today {
+  background: #f5f5f5 !important;
+}
+
+::ng-deep .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background: #171717;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ici chrinore - Couleur des événements (dates de voyages) sur le calendrier */
+::ng-deep .fc-event {
+  border-radius: 6px;
+  padding: 4px 6px;
+  border: none !important;
+  font-weight: 600;
+  cursor: pointer;
+  background: #F5B027 !important;
+  transition: all 150ms;
+}
+
+::ng-deep .fc-event:hover {
+  background: #F54927 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+::ng-deep .fc-col-header-cell {
+  padding: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #737373;
+  background-color: #fafafa;
+  border-color: #e5e5e5 !important;
+}
+
+::ng-deep .fc-scrollgrid {
+  border-color: #e5e5e5 !important;
+}
+
+::ng-deep .fc-daygrid-day {
+  border-color: #e5e5e5 !important;
+}
+
+::ng-deep .fc-daygrid-day-frame {
+  padding: 4px;
+  min-height: 100px;
+}
+
+/* Mode sombre pour le calendrier */
+:host-context(.dark) .page-header {
+  background-color: #0a0a0a;
+  border-color: #262626;
+}
+
+:host-context(.dark) .page-title {
+  color: #fafafa;
+}
+
+:host-context(.dark) .page-description {
+  color: #a3a3a3;
+}
+
+:host-context(.dark) .calendar-card {
+  background-color: #0a0a0a;
+  border-color: #262626;
+}
+
+:host-context(.dark) ::ng-deep .fc {
+  color: #fafafa;
+}
+
+:host-context(.dark) ::ng-deep .fc-toolbar-title {
+  color: #fafafa;
+}
+
+:host-context(.dark) ::ng-deep .fc-button {
+  background: #fafafa !important;
+  border-color: #fafafa !important;
+  color: #0a0a0a !important;
+}
+
+:host-context(.dark) ::ng-deep .fc-button:hover {
+  background: #e5e5e5 !important;
+  border-color: #e5e5e5 !important;
+}
+
+:host-context(.dark) ::ng-deep .fc-col-header-cell {
+  background-color: #171717;
+  color: #a3a3a3;
+  border-color: #262626 !important;
+}
+
+:host-context(.dark) ::ng-deep .fc-scrollgrid {
+  border-color: #262626 !important;
+}
+
+:host-context(.dark) ::ng-deep .fc-daygrid-day {
+  border-color: #262626 !important;
+  background-color: #0a0a0a;
+}
+
+:host-context(.dark) ::ng-deep .fc-daygrid-day.fc-day-today {
+  background: #171717 !important;
+}
+
+:host-context(.dark)
+  ::ng-deep
+  .fc-daygrid-day.fc-day-today
+  .fc-daygrid-day-number {
+  background: #fafafa;
+  color: #0a0a0a;
+}
+
+:host-context(.dark) ::ng-deep .fc-daygrid-day-number {
+  color: #fafafa;
+}
+
+:host-context(.dark) ::ng-deep .fc-event {
+  background: #eb2525 !important;
+  color: #ffffff !important;
+}
+:host-context(.dark)::ng-deep .fc-event:hover {
+  background: #F5B027 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .table-card {
+    border-radius: 8px;
+  }
+
+  .card-header {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}

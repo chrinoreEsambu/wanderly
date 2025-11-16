@@ -1,0 +1,132 @@
+<!-- Bouton mobile pour ouvrir la sidebar -->
+<button
+  class="mobile-sidebar-btn"
+  (click)="toggleSidebar()"
+  [class.hidden]="!isCollapsed"
+>
+  <i class="ri-menu-line"></i>
+</button>
+
+<aside
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+  [class.open]="!isCollapsed"
+>
+  <!-- HEADER : Logo + Toggle Button - Style PESAS -->
+  <div class="sidebar-header">
+    <a routerLink="/admin" class="logo">
+      <i class="ri-bus-line"></i>
+      <span class="logo-text">BusTraveller</span>
+    </a>
+
+    <button
+      class="toggle-btn"
+      (click)="toggleSidebar()"
+      [attr.aria-label]="isCollapsed ? 'Ouvrir sidebar' : 'Fermer sidebar'"
+    >
+      <i
+        [class]="isCollapsed ? 'ri-menu-unfold-line' : 'ri-menu-fold-line'"
+      ></i>
+    </button>
+  </div>
+
+  <!-- NAVIGATION SCROLLABLE - Style PESAS -->
+  <nav class="sidebar-nav">
+    <!-- Section : PRINCIPAL -->
+    <div class="nav-section">
+      <h3 class="nav-section-title">PRINCIPAL</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a
+            routerLink="/admin"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+          >
+            <i class="ri-dashboard-line"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/admin/reservations"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="ri-calendar-check-line"></i>
+            <span class="nav-link-text">Réservations</span>
+            <span *ngIf="pendingCount > 0" class="nav-badge">{{
+              pendingCount
+            }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section : GESTION -->
+    <div class="nav-section">
+      <h3 class="nav-section-title">GESTION</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a
+            routerLink="/admin/voyages"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="ri-bus-line"></i>
+            <span class="nav-link-text">Voyages</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/admin/categories"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="ri-folder-line"></i>
+            <span class="nav-link-text">Catégories</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/admin/users"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="ri-user-line"></i>
+            <span class="nav-link-text">Utilisateurs</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section : PRÉFÉRENCES -->
+    <div class="nav-section">
+      <h3 class="nav-section-title">PRÉFÉRENCES</h3>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <button class="nav-link theme-toggle-btn" (click)="toggleTheme()">
+            <i [class]="isDarkMode ? 'ri-sun-line' : 'ri-moon-line'"></i>
+            <span class="nav-link-text">{{
+              isDarkMode ? "Mode Clair" : "Mode Sombre"
+            }}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- FOOTER : User Profile - Style PESAS -->
+  <div class="sidebar-footer">
+    <div class="user-profile" (click)="logout()">
+      <div class="user-avatar">{{ getInitials() }}</div>
+      <div class="user-info">
+        <div class="user-name">{{ username }}</div>
+        <div class="user-email">{{ email }}</div>
+      </div>
+      <button class="user-menu-btn" aria-label="Déconnexion">
+        <i class="ri-logout-box-line"></i>
+      </button>
+    </div>
+  </div>
+</aside>

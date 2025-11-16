@@ -1,0 +1,285 @@
+<div class="login-container">
+  <button
+    id="theme-toggle-login"
+    class="theme-toggle-btn"
+    title="Changer le thème"
+  >
+    <i class="ri-sun-line" id="theme-icon-login"></i>
+  </button>
+
+  <div class="login-content">
+    <div class="login-form-section">
+      <div class="logo-section">
+        <i class="ri-bus-line logo-icon"></i>
+        <h3>BusTraveller</h3>
+      </div>
+
+      <div class="tabs">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'login'"
+          (click)="switchTab('login')"
+        >
+          Connexion
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'register'"
+          (click)="switchTab('register')"
+        >
+          Inscription
+        </button>
+      </div>
+
+      <div *ngIf="activeTab === 'login'">
+        <div class="header-section">
+          <h1>Bienvenue</h1>
+          <p>Connectez-vous à votre compte</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <div class="input-wrapper">
+              <i class="ri-user-line input-icon"></i>
+              <input
+                type="text"
+                id="username"
+                formControlName="username"
+                placeholder="Votre nom d'utilisateur"
+                class="input"
+                [class.error]="
+                  loginForm.get('username')?.invalid &&
+                  loginForm.get('username')?.touched
+                "
+                autocomplete="username"
+              />
+            </div>
+            <span
+              *ngIf="
+                loginForm.get('username')?.invalid &&
+                loginForm.get('username')?.touched
+              "
+              class="error-message"
+            >
+              Le nom d'utilisateur est requis
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="ri-lock-line input-icon"></i>
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                placeholder="Votre mot de passe"
+                class="input"
+                [class.error]="
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+                "
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="showPassword = !showPassword"
+              >
+                <i
+                  [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"
+                ></i>
+              </button>
+            </div>
+            <span
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+              class="error-message"
+            >
+              Le mot de passe est requis
+            </span>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-base btn-default btn-lg"
+            [disabled]="loginForm.invalid || isLoading"
+            style="width: 100%"
+          >
+            <span *ngIf="!isLoading">Se connecter</span>
+            <span *ngIf="isLoading" class="loading-text">
+              <i class="ri-loader-4-line animate-spin"></i>
+              Connexion...
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <div *ngIf="activeTab === 'register'">
+        <div class="header-section">
+          <h1>Créer un compte</h1>
+          <p>Rejoignez BusTraveller aujourd'hui</p>
+        </div>
+
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="register()"
+          class="login-form"
+        >
+          <div class="form-group">
+            <label for="reg-username">Nom d'utilisateur</label>
+            <div class="input-wrapper">
+              <i class="ri-user-line input-icon"></i>
+              <input
+                type="text"
+                id="reg-username"
+                formControlName="username"
+                placeholder="Votre nom d'utilisateur"
+                class="input"
+                [class.error]="
+                  registerForm.get('username')?.invalid &&
+                  registerForm.get('username')?.touched
+                "
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <div class="input-wrapper">
+              <i class="ri-mail-line input-icon"></i>
+              <input
+                type="email"
+                id="reg-email"
+                formControlName="email"
+                placeholder="votre@email.com"
+                class="input"
+                [class.error]="
+                  registerForm.get('email')?.invalid &&
+                  registerForm.get('email')?.touched
+                "
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-firstname">Prénom</label>
+              <div class="input-wrapper">
+                <i class="ri-user-smile-line input-icon"></i>
+                <input
+                  type="text"
+                  id="reg-firstname"
+                  formControlName="firstName"
+                  placeholder="Prénom"
+                  class="input"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-lastname">Nom</label>
+              <div class="input-wrapper">
+                <i class="ri-user-smile-line input-icon"></i>
+                <input
+                  type="text"
+                  id="reg-lastname"
+                  formControlName="lastName"
+                  placeholder="Nom"
+                  class="input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-phone">Téléphone</label>
+            <div class="input-wrapper">
+              <i class="ri-phone-line input-icon"></i>
+              <input
+                type="tel"
+                id="reg-phone"
+                formControlName="phone"
+                placeholder="+33 6 12 34 56 78"
+                class="input"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password">Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="ri-lock-line input-icon"></i>
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="reg-password"
+                formControlName="password"
+                placeholder="Mot de passe"
+                class="input"
+                [class.error]="
+                  registerForm.get('password')?.invalid &&
+                  registerForm.get('password')?.touched
+                "
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="showPassword = !showPassword"
+              >
+                <i
+                  [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"
+                ></i>
+              </button>
+            </div>
+            <span
+              *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched"
+              class="error-message"
+            >
+              Le mot de passe doit contenir au moins 6 caractères
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-photo">Photo de profil (optionnel)</label>
+            <div class="input-wrapper">
+              <i class="ri-image-line input-icon"></i>
+              <input
+                type="file"
+                id="reg-photo"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                class="input"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-base btn-default btn-lg"
+            [disabled]="registerForm.invalid || isLoading"
+            style="width: 100%"
+          >
+            <span *ngIf="!isLoading">S'inscrire</span>
+            <span *ngIf="isLoading" class="loading-text">
+              <i class="ri-loader-4-line animate-spin"></i>
+              Inscription...
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="login-image">
+      <img src="/img/bus.png" alt="Bus Travel" />
+      <div class="image-overlay">
+        <h2>Bienvenue sur BusTraveller</h2>
+        <p>Votre plateforme de voyage en bus de confiance</p>
+      </div>
+    </div>
+  </div>
+</div>

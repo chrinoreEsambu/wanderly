@@ -1,0 +1,841 @@
+<app-header></app-header>
+
+<!-- Hero Section -->
+<header
+  id="home"
+  style="
+    position: relative;
+    overflow: hidden;
+    /* background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      var(--brand-primary) 100%
+    ); */
+
+    padding: 6rem 1rem 4rem;
+  "
+>
+  <div
+    style="
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    "
+  >
+    <div style="text-align: center; color: white">
+      <span
+        style="
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 9999px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          margin-bottom: 1.5rem;
+          backdrop-filter: blur(10px);
+        "
+      >
+        🚌 BUS YOUR TRAVEL JOURNEY
+      </span>
+
+      <h1
+        style="
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 1.5rem;
+          color: white;
+        "
+      >
+        Where Every Bus Ride<br />Feels Magical!
+      </h1>
+
+      <p
+        style="
+          font-size: 1.125rem;
+          max-width: 600px;
+          margin: 0 auto 2rem;
+          opacity: 0.9;
+          line-height: 1.6;
+        "
+      >
+        Découvrez des destinations incroyables avec confort et style. Réservez
+        votre prochain voyage en quelques clics.
+      </p>
+
+      <div
+        style="
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <button
+          class="home-btn-primary"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--brand-primary);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 150ms ease;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          "
+        >
+          <i class="ri-map-pin-line"></i>
+          Réserver un voyage
+        </button>
+
+        <button
+          class="home-btn-secondary"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 150ms ease;
+          "
+        >
+          <i class="ri-play-circle-line"></i>
+          Voir la vidéo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div
+    style="
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      filter: blur(100px);
+    "
+  ></div>
+</header>
+
+<!-- Popular Destinations Section -->
+<section
+  id="about"
+  style="padding: 4rem 1rem; max-width: 1400px; margin: 0 auto"
+>
+  <div style="text-align: center; margin-bottom: 3rem">
+    <h2 class="text-3xl font-bold" style="margin-bottom: 1rem">
+      Destinations Populaires
+    </h2>
+    <p class="text-muted-foreground" style="max-width: 600px; margin: 0 auto">
+      Découvrez les destinations les plus prisées à travers le monde
+    </p>
+  </div>
+
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    "
+  >
+    <div class="home-card" style="overflow: hidden; cursor: pointer">
+      <div
+        style="position: relative; width: 100%; height: 250px; overflow: hidden"
+      >
+        <img
+          src="/img/card.jpg"
+          alt="Badrinath Temple"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 300ms ease;
+          "
+        />
+      </div>
+      <div style="padding: 1.5rem">
+        <h3
+          style="margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600"
+        >
+          Sacred Calm at Badrinath Temple
+        </h3>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground))">
+            <i class="ri-map-pin-2-line"></i>
+            Badrinath, Uttarakhand, India
+          </p>
+          <span
+            style="
+              display: inline-flex;
+              align-items: center;
+              padding: 0.25rem 0.75rem;
+              border-radius: 9999px;
+              font-size: 0.75rem;
+              font-weight: 600;
+              background: hsl(var(--secondary));
+              color: hsl(var(--secondary-foreground));
+            "
+          >
+            <i
+              class="ri-star-fill"
+              style="color: #ffc107; margin-right: 0.25rem"
+            ></i>
+            4.7
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-card" style="overflow: hidden; cursor: pointer">
+      <div
+        style="position: relative; width: 100%; height: 250px; overflow: hidden"
+      >
+        <img
+          src="/img/card2.jpg"
+          alt="Jagannath Temple"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 300ms ease;
+          "
+        />
+      </div>
+      <div style="padding: 1.5rem">
+        <h3
+          style="margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600"
+        >
+          Divine Majesty at Jagannath Temple
+        </h3>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground))">
+            <i class="ri-map-pin-2-line"></i>
+            Puri, Odisha, India
+          </p>
+          <span
+            style="
+              display: inline-flex;
+              align-items: center;
+              padding: 0.25rem 0.75rem;
+              border-radius: 9999px;
+              font-size: 0.75rem;
+              font-weight: 600;
+              background: hsl(var(--secondary));
+              color: hsl(var(--secondary-foreground));
+            "
+          >
+            <i
+              class="ri-star-fill"
+              style="color: #ffc107; margin-right: 0.25rem"
+            ></i>
+            4.8
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-card" style="overflow: hidden; cursor: pointer">
+      <div
+        style="position: relative; width: 100%; height: 250px; overflow: hidden"
+      >
+        <img
+          src="/img/card3.webp"
+          alt="Neem Karoli Temple"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 300ms ease;
+          "
+        />
+      </div>
+      <div style="padding: 1.5rem">
+        <h3
+          style="margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600"
+        >
+          Spiritual Serenity at Neem Karoli Temple
+        </h3>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground))">
+            <i class="ri-map-pin-2-line"></i>
+            Dehradun, India
+          </p>
+          <span
+            style="
+              display: inline-flex;
+              align-items: center;
+              padding: 0.25rem 0.75rem;
+              border-radius: 9999px;
+              font-size: 0.75rem;
+              font-weight: 600;
+              background: hsl(var(--secondary));
+              color: hsl(var(--secondary-foreground));
+            "
+          >
+            <i
+              class="ri-star-fill"
+              style="color: #ffc107; margin-right: 0.25rem"
+            ></i>
+            4.5
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section
+  id="tour"
+  style="padding: 4rem 1rem; background: hsl(var(--muted) / 0.3)"
+>
+  <div style="max-width: 1400px; margin: 0 auto">
+    <div style="text-align: center; margin-bottom: 3rem">
+      <h2 class="text-3xl font-bold" style="margin-bottom: 1rem">
+        Voyager en bus, c'est simple !
+      </h2>
+      <p class="text-muted-foreground" style="max-width: 600px; margin: 0 auto">
+        Planifiez votre prochaine aventure sans effort
+      </p>
+    </div>
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      "
+    >
+      <!-- Feature Card 1 -->
+      <div class="home-card" style="min-height: 280px">
+        <div style="padding: 2rem">
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: var(--radius);
+              background: linear-gradient(
+                135deg,
+                hsl(var(--primary)),
+                var(--brand-primary)
+              );
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 1.5rem;
+            "
+          >
+            <i
+              class="ri-bookmark-3-line"
+              style="font-size: 2rem; color: white"
+            ></i>
+          </div>
+
+          <h3 class="text-xl font-semibold" style="margin-bottom: 1rem">
+            Réservation Simplifiée
+          </h3>
+          <p class="text-sm text-muted-foreground" style="line-height: 1.7">
+            De la réservation de billets au suivi de votre bus en temps réel,
+            tout se fait en un clic. Plus de files d'attente ni de confusion de
+            dernière minute.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Card 2 -->
+      <div class="home-card" style="min-height: 280px">
+        <div style="padding: 2rem">
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: var(--radius);
+              background: linear-gradient(
+                135deg,
+                hsl(var(--primary)),
+                var(--brand-primary)
+              );
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 1.5rem;
+            "
+          >
+            <i
+              class="ri-landscape-fill"
+              style="font-size: 2rem; color: white"
+            ></i>
+          </div>
+
+          <h3 class="text-xl font-semibold" style="margin-bottom: 1rem">
+            Itinéraires Personnalisés
+          </h3>
+          <p class="text-sm text-muted-foreground" style="line-height: 1.7">
+            Chacun voyage différemment, c'est pourquoi nous créons des plans
+            adaptés à vos besoins. Horaires préférés, options économiques et
+            choix de sièges.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div class="home-card" style="min-height: 280px">
+        <div style="padding: 2rem">
+          <div
+            style="
+              width: 64px;
+              height: 64px;
+              border-radius: var(--radius);
+              background: linear-gradient(
+                135deg,
+                hsl(var(--primary)),
+                var(--brand-primary)
+              );
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 1.5rem;
+            "
+          >
+            <i class="ri-map-2-line" style="font-size: 2rem; color: white"></i>
+          </div>
+
+          <h3 class="text-xl font-semibold" style="margin-bottom: 1rem">
+            Conseils d'Experts
+          </h3>
+          <p class="text-sm text-muted-foreground" style="line-height: 1.7">
+            Des meilleurs points d'embarquement aux astuces de voyage locales,
+            nos conseils sont fournis par des personnes qui connaissent
+            parfaitement les routes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase Section -->
+<section
+  id="package"
+  style="padding: 4rem 1rem; max-width: 1400px; margin: 0 auto"
+>
+  <div
+    style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    "
+  >
+    <div style="order: 2">
+      <img
+        src="/img/bus.png"
+        alt="Bus moderne"
+        class="rounded-xl shadow-lg"
+        style="width: 100%; height: auto"
+      />
+    </div>
+    <div style="order: 1">
+      <h2 class="text-3xl font-bold" style="margin-bottom: 1.5rem">
+        Enflammez votre passion du voyage avec chaque trajet en bus
+      </h2>
+      <p
+        class="text-muted-foreground"
+        style="margin-bottom: 1rem; line-height: 1.7"
+      >
+        Voyager en bus offre confort et vues magnifiques sur le chemin vers des
+        destinations incroyables. Avec des sièges spacieux et la climatisation,
+        vous pouvez vous détendre et profiter du trajet.
+      </p>
+      <p
+        class="text-muted-foreground"
+        style="margin-bottom: 2rem; line-height: 1.7"
+      >
+        Explorez le monde en bus en toute simplicité. De sièges confortables aux
+        routes panoramiques, nos bus offrent le moyen idéal d'explorer villes,
+        nature et tout ce qui se trouve entre les deux.
+      </p>
+      <button
+        class="home-btn-primary"
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem 2rem;
+          font-size: 0.875rem;
+          font-weight: 600;
+          border: none;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          transition: all 150ms ease;
+          background: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+        "
+      >
+        <i class="ri-ticket-line"></i>
+        Réserver un bus maintenant
+        <i class="ri-arrow-right-line"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Banner -->
+<section
+  style="
+    padding: 4rem 1rem;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      var(--brand-primary) 100%
+    );
+  "
+>
+  <div style="max-width: 1400px; margin: 0 auto">
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      "
+    >
+      <div style="color: white">
+        <h3 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 0.5rem">
+          10+
+        </h3>
+        <p style="opacity: 0.9; font-size: 1.125rem">Années d'expérience</p>
+      </div>
+      <div style="color: white">
+        <h3 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 0.5rem">
+          12k
+        </h3>
+        <p style="opacity: 0.9; font-size: 1.125rem">Clients satisfaits</p>
+      </div>
+      <div style="color: white">
+        <h3 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 0.5rem">
+          4.8
+        </h3>
+        <p style="opacity: 0.9; font-size: 1.125rem">Note globale</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Discover More Section -->
+<section style="padding: 4rem 1rem; max-width: 1400px; margin: 0 auto">
+  <div style="text-align: center; margin-bottom: 3rem">
+    <h2 class="text-3xl font-bold" style="margin-bottom: 1rem">
+      Découvrez la paix, la culture et la dévotion
+    </h2>
+    <p class="text-muted-foreground" style="max-width: 600px; margin: 0 auto">
+      Admirez des paysages époustouflants depuis le confort de votre siège
+    </p>
+  </div>
+
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    "
+  >
+    <div class="home-card" style="text-align: center">
+      <div style="padding: 2rem">
+        <div
+          style="
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(
+              135deg,
+              var(--brand-primary),
+              hsl(var(--primary))
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <i
+            class="ri-camera-lens-line"
+            style="font-size: 2.5rem; color: white"
+          ></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem">
+          Votre route, votre histoire
+        </h3>
+        <p
+          style="
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            line-height: 1.7;
+          "
+        >
+          Vivez la liberté de voyager avec nos trajets confortables et fiables.
+          Profitez de vues magnifiques tout en vous relaxant dans des sièges
+          spacieux.
+        </p>
+      </div>
+    </div>
+
+    <div class="home-card" style="text-align: center">
+      <div style="padding: 2rem">
+        <div
+          style="
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(
+              135deg,
+              var(--brand-primary),
+              hsl(var(--primary))
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <i class="ri-ship-line" style="font-size: 2.5rem; color: white"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem">
+          Merveilles côtières
+        </h3>
+        <p
+          style="
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            line-height: 1.7;
+          "
+        >
+          Embarquez pour un voyage à travers les merveilles côtières
+          fascinantes. Profitez de la beauté sereine des plages immaculées et
+          des falaises époustouflantes.
+        </p>
+      </div>
+    </div>
+
+    <div class="home-card" style="text-align: center">
+      <div style="padding: 2rem">
+        <div
+          style="
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(
+              135deg,
+              var(--brand-primary),
+              hsl(var(--primary))
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <i
+            class="ri-landscape-line"
+            style="font-size: 2.5rem; color: white"
+          ></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem">
+          Sites historiques
+        </h3>
+        <p
+          style="
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            line-height: 1.7;
+          "
+        >
+          Explorez le charme des sites historiques lors de nos circuits
+          spécialement conçus. Nos bus confortables vous emmèneront à travers
+          des sites emblématiques.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background: hsl(var(--muted) / 0.3); padding: 4rem 1rem 2rem">
+  <div style="max-width: 1400px; margin: 0 auto">
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      "
+    >
+      <!-- Logo & Description -->
+      <div>
+        <a
+          href="#"
+          class="logo"
+          style="
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: hsl(var(--foreground));
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+          "
+        >
+          <i class="ri-bus-line" style="color: #ffaa00"></i>
+          BusTraveller
+        </a>
+        <p
+          class="text-sm text-muted-foreground"
+          style="margin-bottom: 1.5rem; line-height: 1.7"
+        >
+          Explorez le monde avec facilité et enthousiasme grâce à notre
+          plateforme de voyage en bus tout-en-un. Votre voyage commence ici.
+        </p>
+        <div style="display: flex; gap: 0.75rem">
+          <a href="#" class="btn-base btn-ghost btn-icon">
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <a href="#" class="btn-base btn-ghost btn-icon">
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a href="#" class="btn-base btn-ghost btn-icon">
+            <i class="ri-youtube-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-semibold" style="margin-bottom: 1rem">Liens rapides</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem">
+          <a
+            href="#home"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >Accueil</a
+          >
+          <a
+            href="#about"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >À propos</a
+          >
+          <a
+            href="#tour"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >Circuits</a
+          >
+          <a
+            href="#package"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >Forfaits</a
+          >
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="font-semibold" style="margin-bottom: 1rem">
+          Contactez-nous
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem">
+          <a
+            href="tel:+911234567890"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <i class="ri-phone-fill"></i>
+            +216 50178 5213
+          </a>
+          <a
+            href="mailto:info@bustraveller.com"
+            class="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <i class="ri-mail-line"></i>
+            info&#64;bustraveller.com
+          </a>
+          <span class="text-sm text-muted-foreground flex items-center gap-2">
+            <i class="ri-map-pin-2-fill"></i>
+            Sousse, Tunisia
+          </span>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h4 class="font-semibold" style="margin-bottom: 1rem">Newsletter</h4>
+        <p class="text-sm text-muted-foreground" style="margin-bottom: 1rem">
+          Inscrivez-vous pour recevoir nos dernières offres
+        </p>
+        <div style="display: flex; gap: 0.5rem">
+          <input
+            type="email"
+            placeholder="Votre email"
+            class="input"
+            style="flex: 1"
+          />
+          <button class="btn-base btn-default" style="padding: 0.5rem 1rem">
+            <i class="ri-send-plane-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div
+      style="
+        padding-top: 2rem;
+        border-top: 1px solid hsl(var(--border));
+        text-align: center;
+      "
+    >
+      <p class="text-sm text-muted-foreground">
+        Copyright © 2026
+        <a
+          href="https://www.linkedin.com/company/tika-%E2%84%A2"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color: #ffc107; font-weight: 600"
+          >Tika</a
+        >. Tous droits réservés.
+      </p>
+    </div>
+  </div>
+</footer>

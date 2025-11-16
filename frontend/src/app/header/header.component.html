@@ -1,0 +1,109 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/home" class="navbar-brand">
+      <i class="ri-bus-line"></i>
+      <span class="brand-text">BusTraveller</span>
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="mobile-menu-btn"
+      (click)="toggleMobileMenu()"
+      aria-label="Menu"
+    >
+      <i [class]="isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'"></i>
+    </button>
+
+    <!-- Navigation Links -->
+    <ul class="navbar-menu" [class.mobile-open]="isMobileMenuOpen">
+      <li>
+        <a routerLink="/home" (click)="closeMobileMenu()"
+          ><i class="ri-home-line"></i> Accueil</a
+        >
+      </li>
+      <li>
+        <a routerLink="/voyages-public" (click)="closeMobileMenu()"
+          ><i class="ri-bus-line"></i> Voyages</a
+        >
+      </li>
+
+      <li *ngIf="isAdmin">
+        <a routerLink="/admin" (click)="closeMobileMenu()"
+          ><i class="ri-dashboard-line"></i> Dashboard Admin</a
+        >
+      </li>
+
+      <li *ngIf="isClient">
+        <a routerLink="/client-dashboard" (click)="closeMobileMenu()"
+          ><i class="ri-dashboard-line"></i> Dashboard</a
+        >
+      </li>
+
+      <!-- Mobile Only Actions -->
+      <li class="mobile-only">
+        <button
+          (click)="toggleTheme(); closeMobileMenu()"
+          class="mobile-action-btn"
+        >
+          <i [class]="isDarkMode ? 'ri-moon-line' : 'ri-sun-line'"></i>
+          {{ isDarkMode ? "Mode Sombre" : "Mode Clair" }}
+        </button>
+      </li>
+
+      <li *ngIf="!isAuthenticated" class="mobile-only">
+        <a
+          routerLink="/login"
+          (click)="closeMobileMenu()"
+          class="mobile-login-btn"
+        >
+          <i class="ri-login-box-line"></i> Connexion
+        </a>
+      </li>
+
+      <li *ngIf="isAuthenticated" class="mobile-only">
+        <button (click)="logout(); closeMobileMenu()" class="mobile-action-btn">
+          <i class="ri-logout-box-line"></i> Déconnexion
+        </button>
+      </li>
+    </ul>
+
+    <!-- Desktop Actions -->
+    <div class="navbar-actions desktop-only">
+      <button (click)="toggleTheme()" class="icon-btn" title="Changer le thème">
+        <i
+          [class]="isDarkMode ? 'ri-moon-line' : 'ri-sun-line'"
+          id="theme-icon"
+        ></i>
+      </button>
+
+      <a routerLink="/panier" class="icon-btn cart-btn">
+        <i class="ri-shopping-cart-line"></i>
+        <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+      </a>
+
+      <button *ngIf="!isAuthenticated" routerLink="/login" class="btn-login">
+        <i class="ri-login-box-line"></i> Connexion
+      </button>
+
+      <div *ngIf="isAuthenticated" class="user-menu">
+        <button class="user-btn" (click)="toggleUserMenu()">
+          <i class="ri-user-line"></i>
+          <span class="username-text">{{ username }}</span>
+          <i class="ri-arrow-down-s-line"></i>
+        </button>
+        <div *ngIf="showUserMenu" class="user-dropdown">
+          <button (click)="navigateToDashboard()">
+            <i class="ri-dashboard-line"></i>
+            {{ isAdmin ? "Admin" : "Dashboard" }}
+          </button>
+          <hr />
+          <button (click)="logout()" class="logout-btn">
+            <i class="ri-logout-box-line"></i> Déconnexion
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div style="height: 70px"></div>

@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div class="panier-container">
+  <div class="container">
+    <div class="panier-header">
+      <h1>
+        <i class="ri-shopping-cart-line"></i>
+        Mon Panier
+      </h1>
+      <p>{{ cartItems.length }} article(s)</p>
+    </div>
+
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      <i class="ri-shopping-cart-line"></i>
+      <h2>Votre panier est vide</h2>
+      <p>Ajoutez des voyages à votre panier pour continuer</p>
+      <button class="btn-base btn-default btn-lg" (click)="continueShopping()">
+        <i class="ri-bus-line"></i>
+        Découvrir les voyages
+      </button>
+    </div>
+
+    <div *ngIf="cartItems.length > 0" class="panier-content">
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+          <div class="item-image">
+            <img
+              [src]="getPhotoUrl(item.voyage.photo)"
+              [alt]="item.voyage.name"
+            />
+          </div>
+
+          <div class="item-details">
+            <h3>{{ item.voyage.name }}</h3>
+            <div class="item-info">
+              <div class="info-badge">
+                <i class="ri-map-pin-line"></i>
+                {{ item.category.name }}
+              </div>
+              <div class="info-badge">
+                <i class="ri-calendar-line"></i>
+                {{ item.voyage.date }}
+              </div>
+              <div class="info-badge">
+                <i class="ri-group-line"></i>
+                {{ item.nombrePersonnes }} personne(s)
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-remove" (click)="removeItem(i)" title="Retirer">
+            <i class="ri-delete-bin-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <div class="summary-card">
+          <h2>Résumé de la commande</h2>
+
+          <div class="summary-items">
+            <div class="summary-row">
+              <span>Nombre d'articles</span>
+              <strong>{{ cartItems.length }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Total de personnes</span>
+              <strong>{{ getTotalPersonnes() }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-actions">
+            <button
+              class="btn-base btn-default btn-lg"
+              (click)="commander()"
+              [disabled]="isLoading"
+              style="width: 100%"
+            >
+              <span *ngIf="!isLoading">
+                <i class="ri-check-line"></i>
+                Commander
+              </span>
+              <span *ngIf="isLoading" class="loading-text">
+                <i class="ri-loader-4-line animate-spin"></i>
+                Traitement...
+              </span>
+            </button>
+
+            <button
+              class="btn-base btn-outline btn-lg"
+              (click)="continueShopping()"
+              style="width: 100%"
+            >
+              <i class="ri-arrow-left-line"></i>
+              Continuer mes achats
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

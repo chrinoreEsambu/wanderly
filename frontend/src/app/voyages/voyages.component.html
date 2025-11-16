@@ -1,0 +1,134 @@
+<div
+  class="w-full"
+  style="padding: 2rem 1rem; max-width: 1400px; margin: 0 auto"
+>
+  <!-- Header Section -->
+  <div class="flex flex-col gap-4 mb-4" style="margin-bottom: 2rem">
+    <div class="flex items-center justify-between flex-wrap" style="gap: 1rem">
+      <div>
+        <h1 class="text-3xl font-bold" style="margin-bottom: 0.5rem">
+          Liste des voyages
+        </h1>
+        <p class="text-muted-foreground">
+          Gérez et explorez tous les voyages disponibles
+        </p>
+      </div>
+      <button
+        (click)="addvoyage()"
+        class="btn-base btn-default btn-default-size"
+        title="Ajouter un voyage"
+      >
+        <i class="ri-add-line"></i>
+        Ajouter un voyage
+      </button>
+    </div>
+  </div>
+
+  <!-- Voyages Grid -->
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    "
+  >
+    <div
+      class="card hover-lift"
+      *ngFor="let voyage of Listvoyage"
+      style="overflow: hidden"
+    >
+      <!-- Image -->
+      <div
+        style="
+          position: relative;
+          width: 100%;
+          height: 200px;
+          overflow: hidden;
+          background: hsl(var(--muted));
+        "
+      >
+        <img
+          [src]="'http://localhost:8763/voyage/files/' + voyage.photo"
+          [alt]="voyage.name"
+          style="width: 100%; height: 100%; object-fit: cover"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="card-content" style="padding: 1.5rem">
+        <h3 class="card-title" style="margin-bottom: 0.75rem">
+          {{ voyage.name }}
+        </h3>
+
+        <div
+          class="flex items-center gap-2"
+          style="color: hsl(var(--muted-foreground)); margin-bottom: 1rem"
+        >
+          <i class="ri-calendar-line"></i>
+          <span class="text-sm">{{ voyage.date }}</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div
+        class="card-footer"
+        style="
+          padding: 1rem 1.5rem;
+          border-top: 1px solid hsl(var(--border));
+          justify-content: flex-end;
+          gap: 0.5rem;
+        "
+      >
+        <button
+          (click)="viewvoyage(voyage.id)"
+          class="btn-base btn-ghost btn-icon"
+          title="Voir les détails"
+        >
+          <i class="ri-eye-line"></i>
+        </button>
+
+        <button
+          (click)="editvoyage(voyage.id)"
+          class="btn-base btn-ghost btn-icon"
+          title="Modifier"
+        >
+          <i class="ri-edit-line"></i>
+        </button>
+
+        <button
+          (click)="deletevoyage(voyage.id)"
+          class="btn-base btn-ghost btn-icon text-red-600"
+          title="Supprimer"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div
+    *ngIf="!Listvoyage || Listvoyage.length === 0"
+    class="card"
+    style="padding: 4rem 2rem; text-align: center"
+  >
+    <i
+      class="ri-map-pin-line"
+      style="
+        font-size: 3rem;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 1rem;
+      "
+    ></i>
+    <h3 class="text-xl font-semibold" style="margin-bottom: 0.5rem">
+      Aucun voyage trouvé
+    </h3>
+    <p class="text-muted-foreground" style="margin-bottom: 1.5rem">
+      Commencez par ajouter votre premier voyage
+    </p>
+    <button (click)="addvoyage()" class="btn-base btn-default btn-default-size">
+      <i class="ri-add-line"></i>
+      Ajouter un voyage
+    </button>
+  </div>
+</div>
