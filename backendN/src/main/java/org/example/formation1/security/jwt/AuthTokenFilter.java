@@ -34,6 +34,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
           throws ServletException, IOException {
     String path = request.getRequestURI();
     
+    // Skip JWT authentication for public file endpoints (images)
+    if (path.contains("/files/")) {
+      logger.debug("Skipping JWT authentication for public files: {}", path);
+      filterChain.doFilter(request, response);
+      return;
+    }
+    
     // Skip JWT authentication for public endpoints EXCEPT /user/signout
     if ((path.startsWith("/voyage/") || 
          path.startsWith("/user/") || 

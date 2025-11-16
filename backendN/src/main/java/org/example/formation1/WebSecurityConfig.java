@@ -60,15 +60,15 @@ public class WebSecurityConfig {
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/voyage/**").permitAll()        // 🔓 Autorise tout sur /voyage
-						.requestMatchers("/user/**").permitAll()
-						.requestMatchers("/category/**").permitAll()
-						.requestMatchers("/reservation/**").permitAll()
-						.anyRequest().authenticated()                    // 🔐 Auth obligatoire pour le reste
-				);
-
-		http.authenticationProvider(authenticationProvider());
+			.authorizeHttpRequests(authorize -> authorize
+					.requestMatchers("/voyage/files/**").permitAll()  // 🔓 Images voyages publiques
+					.requestMatchers("/user/files/**").permitAll()    // 🔓 Images users publiques
+					.requestMatchers("/voyage/**").permitAll()        // 🔓 Autorise tout sur /voyage
+					.requestMatchers("/user/**").permitAll()
+					.requestMatchers("/category/**").permitAll()
+					.requestMatchers("/reservation/**").permitAll()
+					.anyRequest().authenticated()                    // 🔐 Auth obligatoire pour le reste
+			);		http.authenticationProvider(authenticationProvider());
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
