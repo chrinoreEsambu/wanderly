@@ -45,7 +45,7 @@ public class ReservationController {
     @Autowired
     private org.example.formation1.Services.CategoryService categoryService;
 
-    // ✅ Création de réservation + envoi email
+    // ✅ Création de réservation + envoi email ch
     @PostMapping("/create/{userId}/{voyageId}/{categoryId}")
     public ReservationModel create(@ModelAttribute ReservationModel reservation, 
                                    @PathVariable Long userId,
