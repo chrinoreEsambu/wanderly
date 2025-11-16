@@ -16,6 +16,10 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.getusers();
   }
+
+  getUserPhotoUrl(photo: string): string {
+    return `${environment.baseUrl}/user/files/${photo}`;
+  }
   getusers() {
     this.service.Allusers().subscribe(
       (data) => {

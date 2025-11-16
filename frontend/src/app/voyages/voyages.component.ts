@@ -19,6 +19,10 @@ export class VoyagesComponent implements OnInit {
     this.getcategory();
   }
 
+  getVoyagePhotoUrl(photo: string): string {
+    return `${environment.baseUrl}/voyage/files/${photo}`;
+  }
+
   getvoyage() {
     this.service.Allvoyages().subscribe(
       (data) => {
