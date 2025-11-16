@@ -47,7 +47,7 @@
             "
           >
             <img
-              [src]="getUserPhotoUrl(user.photo)"
+              [src]="user.photoUrl || 'assets/img/placeholder.jpg'"
               [alt]="user.username"
               style="width: 100%; height: 100%; object-fit: cover"
             />

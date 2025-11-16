@@ -19,10 +19,6 @@ export class VoyagesComponent implements OnInit {
     this.getcategory();
   }
 
-  getVoyagePhotoUrl(photo: string): string {
-    return `${environment.baseUrl}/voyage/files/${photo}`;
-  }
-
   getvoyage() {
     this.service.Allvoyages().subscribe(
       (data) => {
@@ -39,7 +35,7 @@ export class VoyagesComponent implements OnInit {
     this.service.oneVoyage(id).subscribe(
       (res: any) => {
         console.log('Fetched data:', res);
-        const imageUrl = `${environment.baseUrl}/voyage/files/${res.photo}`;
+        const imageUrl = res.photoUrl || 'assets/img/placeholder.jpg';
         Swal.fire({
           html: `
             <div style="border: 1px solid #0a0a0a; border-radius: 12px; padding: 2rem; background: #fff; position: relative;">

@@ -48,7 +48,7 @@
         "
       >
         <img
-          [src]="getVoyagePhotoUrl(voyage.photo)"
+          [src]="voyage.photoUrl || 'assets/img/placeholder.jpg'"
           [alt]="voyage.name"
           style="width: 100%; height: 100%; object-fit: cover"
         />

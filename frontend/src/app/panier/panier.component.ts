@@ -53,9 +53,7 @@ export class PanierComponent implements OnInit {
     });
   }
 
-  getPhotoUrl(photo: string): string {
-    return `${environment.baseUrl}/voyage/files/${photo}`;
-  }
+  // photoUrl est maintenant fourni directement par le backend
 
   getTotalPersonnes(): number {
     return this.cartItems.reduce((sum, item) => sum + item.nombrePersonnes, 0);

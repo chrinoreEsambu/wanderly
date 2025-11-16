@@ -24,7 +24,7 @@
       <div *ngIf="!isLoading && voyages.length > 0" class="voyages-grid">
         <div *ngFor="let voyage of voyages" class="voyage-card">
           <div class="voyage-image">
-            <img [src]="getPhotoUrl(voyage.photo)" [alt]="voyage.name" />
+            <img [src]="voyage.photoUrl || 'assets/img/placeholder.jpg'" [alt]="voyage.name" />
             <div class="voyage-badge">
               <i class="ri-map-pin-line"></i>
               {{ voyage.category?.name || "Sans catégorie" }}

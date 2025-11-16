@@ -22,6 +22,9 @@ public class UserModel {
     private Boolean confirm=false;
     private String passwordResetToken;
 
+    // URL publique Supabase (non stockée en base, calculée à la volée)
+    @Transient
+    private String photoUrl;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<ReservationModel> reservations;
@@ -104,6 +107,13 @@ public class UserModel {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getPhotoUrl() {
+        if (photo != null && !photo.isEmpty()) {
+            return "https://nrewphbqaqgjibhakjsy.supabase.co/storage/v1/object/public/voyage-images/" + photo;
+        }
+        return null;
     }
 
     public String getRole() {

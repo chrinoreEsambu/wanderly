@@ -133,7 +133,5 @@ export class VoyagesPublicComponent implements OnInit {
     });
   }
 
-  getPhotoUrl(photo: string): string {
-    return `${environment.baseUrl}/voyage/files/${photo}`;
-  }
+  // photoUrl est maintenant fourni directement par le backend
 }

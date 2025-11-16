@@ -16,8 +16,8 @@ public class StorageService {
     @Value("${supabase.url}")
     private String supabaseUrl;
 
-    @Value("${supabase.key}")
-    private String supabaseKey;
+    @Value("${supabase.service.key}")
+    private String supabaseServiceKey;
 
     @Value("${supabase.bucket}")
     private String bucketName;
@@ -47,10 +47,11 @@ public class StorageService {
                 MediaType.parse(file.getContentType())
             );
 
-            // Créer la requête POST avec authentification
+            // Créer la requête POST avec authentification (utiliser service_role pour upload)
             Request request = new Request.Builder()
                 .url(uploadUrl)
-                .header("Authorization", "Bearer " + supabaseKey)
+                .header("Authorization", "Bearer " + supabaseServiceKey)
+                .header("apikey", supabaseServiceKey)
                 .header("Content-Type", file.getContentType())
                 .post(requestBody)
                 .build();

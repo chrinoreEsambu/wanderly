@@ -77,14 +77,10 @@ export class ClientDashboardComponent implements OnInit {
     }
   }
 
-  getPhotoUrl(photo: string): string {
-    return `${environment.baseUrl}/voyage/files/${photo}`;
-  }
+  // photoUrl est maintenant fourni directement par le backend
 
   viewDetails(reservation: any) {
-    const imageUrl = reservation.voyage?.photo
-      ? this.getPhotoUrl(reservation.voyage.photo)
-      : '';
+    const imageUrl = reservation.voyage?.photoUrl || 'assets/img/placeholder.jpg';
 
     Swal.fire({
       title: 'Détails de la réservation',

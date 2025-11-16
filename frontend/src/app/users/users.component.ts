@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
     this.service.oneUser(id).subscribe(
       (res: any) => {
         console.log('Fetched data:', res);
-        const imageUrl = `${environment.baseUrl}/user/files/${res.photo}`;
+        const imageUrl = res.photoUrl || 'assets/img/placeholder.jpg';
         Swal.fire({
           html: `
             <div style="border: 1px solid #0a0a0a; border-radius: 12px; padding: 2rem; background: #fff; position: relative;">

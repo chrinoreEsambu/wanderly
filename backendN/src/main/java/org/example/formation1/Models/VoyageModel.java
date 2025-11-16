@@ -12,12 +12,23 @@ public class VoyageModel {
     private String date ;
     private String photo;
 
+    // URL publique Supabase (non stockée en base, calculée à la volée)
+    @Transient
+    private String photoUrl;
+
     public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getPhotoUrl() {
+        if (photo != null && !photo.isEmpty()) {
+            return "https://nrewphbqaqgjibhakjsy.supabase.co/storage/v1/object/public/voyage-images/" + photo;
+        }
+        return null;
     }
 
     @ManyToOne
