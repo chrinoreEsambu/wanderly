@@ -11,7 +11,7 @@
 
   --card: 0 0% 100%; /* #FFFFFF */
   --card-foreground: 0 0% 3.9%;
-
+/* ohh */
   --primary: 0 0% 0%; /* #000000 - Noir */
   --primary-foreground: 0 0% 98%; /* #FAFAFA */
 
@@ -375,7 +375,7 @@ h3 {
    🏷️ BADGE COMPONENTS
    ============================================ */
 .badge {
-  
+
   display: inline-flex;
   align-items: center;
   border-radius: 9999px; /* fully rounded */
