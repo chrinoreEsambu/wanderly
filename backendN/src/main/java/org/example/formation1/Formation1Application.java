@@ -10,4 +10,9 @@ public class Formation1Application {
         SpringApplication.run(Formation1Application.class, args);
     }
 
+    @org.springframework.context.annotation.Bean
+    public org.example.formation1.Services.TicketPdfService ticketPdfService() {
+        return new org.example.formation1.Services.TicketPdfService();
+    }
+
 }

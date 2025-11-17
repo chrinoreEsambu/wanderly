@@ -107,6 +107,10 @@
               <i class="ri-eye-line"></i>
               Voir détails
             </button>
+            <button *ngIf="reservation.confirm && reservation.paid" class="client-btn-download" (click)="downloadTicket(reservation)">
+              <i class="ri-ticket-line"></i>
+              Télécharger le ticket
+            </button>
           </div>
         </div>
       </div>

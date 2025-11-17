@@ -137,4 +137,35 @@ export class ClientDashboardComponent implements OnInit {
       confirmButtonText: 'Fermer',
     });
   }
+
+  downloadTicket(reservation: any) {
+    const ticketUrl = `${environment.baseUrl}/api/reservations/${reservation.id}/ticket`;
+    fetch(ticketUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${this.authService.getToken()}`
+      }
+    })
+      .then(response => {
+        if (!response.ok) throw new Error('Erreur lors du téléchargement du ticket');
+        return response.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ticket-${reservation.id}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Impossible de télécharger le ticket PDF.'
+        });
+      });
+  }
 }
