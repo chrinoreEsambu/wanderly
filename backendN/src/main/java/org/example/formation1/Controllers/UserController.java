@@ -51,27 +51,34 @@ public class UserController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
-
-   @PostMapping("/create")
+    @PostMapping("/create")
     public UserModel create(UserModel user, @RequestParam(value = "file", required = false) MultipartFile file) {
         System.out.println("=== CRÉATION DE COMPTE ===");
         System.out.println("Username: " + user.getUsername());
         System.out.println("Email: " + user.getEmail());
-        System.out.println("Role: " + user.getRole());
-        
+        System.out.println("Role reçu: " + user.getRole());
+
+        // S'assurer qu'un rôle par défaut est assigné si aucun n'est fourni
+        if (user.getRole() == null || user.getRole().trim().isEmpty()) {
+            user.setRole("client");
+            System.out.println("✓ Rôle par défaut assigné: client");
+        }
+
+        System.out.println("Role final: " + user.getRole());
+
         String namephoto = null;
         if (file != null && !file.isEmpty()) {
             namephoto = storageService.store(file);
             System.out.println("✓ Photo uploadée: " + namephoto);
         }
-        
+
         user.setPhoto(namephoto);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setConfirm(true); // Confirmation automatique
-        
+
         UserModel createdUser = userRepo.save(user);
         System.out.println("✓ Utilisateur créé avec ID: " + createdUser.getId());
-        
+
         return createdUser;
     }
 
@@ -89,8 +96,7 @@ public class UserController {
     public UserModel update(
             UserModel user,
             @RequestParam(value = "file", required = false) MultipartFile file,
-            @PathVariable Long id
-    ) {
+            @PathVariable Long id) {
         user.setId(id);
         UserModel old = userService.getUserById(id);
 
@@ -101,18 +107,25 @@ public class UserController {
             user.setPhoto(namephoto);
         }
 
-        if (user.getFirstName() == null) user.setFirstName(old.getFirstName());
-        if (user.getLastName() == null) user.setLastName(old.getLastName());
-        if (user.getEmail() == null) user.setEmail(old.getEmail());
-        if (user.getPassword() == null) user.setPassword(old.getPassword());
-        if (user.getPhone() == null) user.setPhone(old.getPhone());
-        if (user.getUsername() == null) user.setUsername(old.getUsername());
-        if (user.getRole() == null) user.setRole(old.getRole());
-        if (user.getConfirm() == null) user.setConfirm(old.getConfirm());
+        if (user.getFirstName() == null)
+            user.setFirstName(old.getFirstName());
+        if (user.getLastName() == null)
+            user.setLastName(old.getLastName());
+        if (user.getEmail() == null)
+            user.setEmail(old.getEmail());
+        if (user.getPassword() == null)
+            user.setPassword(old.getPassword());
+        if (user.getPhone() == null)
+            user.setPhone(old.getPhone());
+        if (user.getUsername() == null)
+            user.setUsername(old.getUsername());
+        if (user.getRole() == null)
+            user.setRole(old.getRole());
+        if (user.getConfirm() == null)
+            user.setConfirm(old.getConfirm());
 
         return userService.updateUser(user);
     }
-
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
@@ -121,19 +134,19 @@ public class UserController {
     }
 
     @GetMapping("/signout")
-    public ResponseEntity<?> logoutUser(){
+    public ResponseEntity<?> logoutUser() {
         System.out.println("=== DÉCONNEXION ===");
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            
+
             if (authentication == null || authentication.getPrincipal() == null) {
                 System.out.println("❌ Pas d'authentification trouvée");
                 return ResponseEntity.status(401).body(new MessageResponse("Non authentifié"));
             }
-            
+
             Object principal = authentication.getPrincipal();
             System.out.println("✓ Type du principal: " + principal.getClass().getName());
-            
+
             Long userId;
             if (principal instanceof UserDetailsImpl) {
                 userId = ((UserDetailsImpl) principal).getId();
@@ -141,12 +154,12 @@ public class UserController {
                 System.out.println("❌ Principal n'est pas UserDetailsImpl: " + principal);
                 return ResponseEntity.status(401).body(new MessageResponse("Session invalide"));
             }
-            
+
             System.out.println("✓ User ID récupéré: " + userId);
-            
+
             int deletedCount = refreshTokenService.deleteByUserId(userId);
             System.out.println("✅ Refresh tokens supprimés: " + deletedCount);
-            
+
             return ResponseEntity.ok(new MessageResponse("log out successful"));
         } catch (Exception e) {
             System.out.println("❌ ERREUR déconnexion: " + e.getMessage());
@@ -158,11 +171,11 @@ public class UserController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(
             @RequestParam("username") String username,
-            @RequestParam("password") String password){
+            @RequestParam("password") String password) {
         System.out.println("=== TENTATIVE DE CONNEXION ===");
         System.out.println("Username reçu: " + username);
         System.out.println("Password reçu: " + password);
-        
+
         try {
             // Vérifier si l'utilisateur existe
             Optional<UserModel> userOpt = userRepo.findByUsername(username);
@@ -170,28 +183,28 @@ public class UserController {
                 System.out.println("❌ Utilisateur introuvable: " + username);
                 return ResponseEntity.badRequest().body(new MessageResponse("Utilisateur introuvable"));
             }
-            
+
             UserModel user = userOpt.get();
             System.out.println("✓ Utilisateur trouvé: " + user.getUsername());
             System.out.println("✓ Email: " + user.getEmail());
             System.out.println("✓ Role: " + user.getRole());
             System.out.println("✓ Confirm: " + user.getConfirm());
-            
+
             // Authentification Spring Security
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(username, password));
             System.out.println("✓ Authentification réussie");
-            
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            
+
             // Génération des tokens
             String jwt = jwtUtils.generateJwtToken(userDetails);
             System.out.println("✓ JWT généré: " + jwt.substring(0, 20) + "...");
-            
+
             RefreshTokenmodel refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
             System.out.println("✓ Refresh token créé");
-            
+
             return ResponseEntity.ok(
                     new JwtResponse(jwt,
                             "bearer",
@@ -199,27 +212,28 @@ public class UserController {
                             userDetails.getId(),
                             userDetails.getUsername(),
                             userDetails.getEmail(),
-                            user.getRole()
-                    )
-            );
+                            user.getRole()));
         } catch (Exception e) {
             System.out.println("❌ ERREUR: " + e.getClass().getSimpleName() + " - " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(new MessageResponse("Erreur: " + e.getMessage()));
         }
     }
+
     @GetMapping("/confirm")
-    public ResponseEntity<?> confirm (@RequestParam String email){
-        UserModel user =userRepo.findFirstByEmail(email);
+    public ResponseEntity<?> confirm(@RequestParam String email) {
+        UserModel user = userRepo.findFirstByEmail(email);
         user.setConfirm(true);
         userRepo.save(user);
         return ResponseEntity.ok("is confim");
     }
+
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource file = storageService.loadFile(filename);
-        // Retourner l'image inline (affichage direct) au lieu de attachment (téléchargement)
+        // Retourner l'image inline (affichage direct) au lieu de attachment
+        // (téléchargement)
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, "image/*")
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")

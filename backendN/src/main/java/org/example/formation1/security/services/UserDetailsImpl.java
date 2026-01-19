@@ -1,6 +1,5 @@
 package org.example.formation1.security.services;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.example.formation1.Models.UserModel;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,15 +37,15 @@ public class UserDetailsImpl implements UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImpl(Long id, String username, String email, String password,
-						   Collection<?extends GrantedAuthority> authorities
-	) {
+			Collection<? extends GrantedAuthority> authorities, String role) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
-		this.role=role;
+		this.role = role;
 	}
+
 	public static UserDetailsImpl build(UserModel user) {
 		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
 		return new UserDetailsImpl(
@@ -54,7 +53,8 @@ public class UserDetailsImpl implements UserDetails {
 				user.getUsername(),
 				user.getEmail(),
 				user.getPassword(),
-				Collections.singletonList(authority)  // wrap the single authority in a list
+				Collections.singletonList(authority), // wrap the single authority in a list
+				user.getRole() // Passer le rôle au constructeur
 		);
 	}
 

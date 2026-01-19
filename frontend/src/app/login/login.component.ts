@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   loginForm!: FormGroup;
@@ -170,6 +170,9 @@ export class LoginComponent implements OnInit {
     Object.keys(this.registerForm.value).forEach((key) => {
       formData.append(key, this.registerForm.value[key]);
     });
+
+    // S'assurer que le rôle 'client' est toujours envoyé
+    formData.set('role', 'client');
 
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
