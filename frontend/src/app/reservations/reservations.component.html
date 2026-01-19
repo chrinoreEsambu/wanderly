@@ -1,6 +1,13 @@
 <div
   class="w-full"
-  style="padding: 2rem 1rem; max-width: 1400px; margin: 0 auto"
+  style="
+    padding: 2rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  "
 >
   <!-- Header Section -->
   <div class="flex flex-col gap-4 mb-4" style="margin-bottom: 2rem">
@@ -10,23 +17,50 @@
           Réservations
         </h1>
         <p class="text-muted-foreground">
-          Gérez toutes les réservations de voyages
+          Gérez toutes les réservations de voyages ({{ totalItems || 0 }} au
+          total)
         </p>
       </div>
-      <button
-        (click)="addreservation()"
-        class="btn-base btn-default btn-default-size"
-        title="Nouvelle réservation"
-      >
-        <i class="ri-calendar-check-line"></i>
-        Nouvelle réservation
-      </button>
+      <div class="flex items-center gap-2">
+        <select
+          [(ngModel)]="itemsPerPage"
+          (change)="currentPage = 1"
+          class="form-select"
+          style="
+            padding: 0.5rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: 6px;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            margin-right: 1rem;
+          "
+        >
+          <option value="5">5 par page</option>
+          <option value="10">10 par page</option>
+          <option value="20">20 par page</option>
+          <option value="50">50 par page</option>
+        </select>
+        <button
+          (click)="addreservation()"
+          class="btn-base btn-default btn-default-size"
+          title="Nouvelle réservation"
+        >
+          <i class="ri-calendar-check-line"></i>
+          Nouvelle réservation
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Table Card -->
-  <div class="card">
-    <div class="table-wrapper">
+  <div
+    class="card"
+    style="flex: 1; min-height: 60vh; display: flex; flex-direction: column"
+  >
+    <div
+      class="table-wrapper"
+      style="flex: 1; overflow-y: auto; overflow-x: auto"
+    >
       <table>
         <thead>
           <tr>
@@ -58,7 +92,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let res of Listreservation">
+          <tr *ngFor="let res of paginatedReservations">
             <td class="table-cell font-medium">#{{ res.id }}</td>
             <td class="table-cell">{{ res.date }}</td>
             <td class="table-cell">
@@ -126,6 +160,58 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Pagination -->
+    <div
+      *ngIf="totalPages > 1"
+      style="
+        padding: 1.5rem;
+        border-top: 1px solid hsl(var(--border));
+        background: hsl(var(--card));
+      "
+    >
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-muted-foreground">
+          Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à
+          {{ Math.min(currentPage * itemsPerPage, totalItems) }} sur
+          {{ totalItems }} réservations
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="btn-base btn-outline btn-sm"
+            style="padding: 0.5rem; min-width: 40px"
+          >
+            <i class="ri-arrow-left-line"></i>
+          </button>
+
+          <div class="flex items-center gap-1">
+            <button
+              *ngFor="let page of pages"
+              (click)="goToPage(page)"
+              [ngClass]="{
+                'btn-base btn-default btn-sm': page === currentPage,
+                'btn-base btn-ghost btn-sm': page !== currentPage,
+              }"
+              style="min-width: 40px; padding: 0.5rem"
+            >
+              {{ page }}
+            </button>
+          </div>
+
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="btn-base btn-outline btn-sm"
+            style="padding: 0.5rem; min-width: 40px"
+          >
+            <i class="ri-arrow-right-line"></i>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Empty State -->

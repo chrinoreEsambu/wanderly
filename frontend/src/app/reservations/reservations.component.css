@@ -686,6 +686,105 @@ footer {
   color: #0a0a0a !important;
 }
 
+/* Styles spécifiques pour la table des réservations */
+.table-wrapper {
+  position: relative;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  min-width: 800px; /* Assure une largeur minimale */
+}
+
+/* Amélioration responsive */
+@media (max-width: 768px) {
+  .table-wrapper {
+    max-height: 50vh !important;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}
+
+/* Styles pour les cellules de table */
+.table-cell {
+  white-space: nowrap;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Styles pour la pagination */
+.pagination-container {
+  padding: 1.5rem;
+  border-top: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination-button {
+  min-width: 40px;
+  padding: 0.5rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background: hsl(var(--muted));
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button.active {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+}
+
 @media (width > 1200px) {
   .header__content {
     padding-inline: 1rem 0;

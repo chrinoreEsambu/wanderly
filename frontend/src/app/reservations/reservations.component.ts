@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AllmyservicesService } from '../services/allmyservices.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservations',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.css',
 })
@@ -16,6 +17,15 @@ export class ReservationsComponent implements OnInit {
   Listusers: any;
   Listvoyage: any;
   Listcategory: any;
+
+  // Propriétés pour la pagination
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalItems = 0;
+
+  // Référence Math pour utilisation dans le template
+  Math = Math;
+
   ngOnInit(): void {
     this.getreservation();
     this.getusers();
@@ -25,14 +35,53 @@ export class ReservationsComponent implements OnInit {
 
   getreservation() {
     this.service.Allreservations().subscribe(
-      (data) => {
+      (data: any) => {
         console.log(data);
         this.Listreservation = data;
+        this.totalItems = Array.isArray(data) ? data.length : 0;
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
+  }
+
+  // Méthodes pour la pagination
+  get paginatedReservations() {
+    if (!this.Listreservation) return [];
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.Listreservation.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  get pages() {
+    const pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 
   editreservation(id: String) {
@@ -205,7 +254,7 @@ export class ReservationsComponent implements OnInit {
                       }
                     },
                   });
-                }
+                },
               );
           }
         });
@@ -237,7 +286,7 @@ export class ReservationsComponent implements OnInit {
             }
           },
         });
-      }
+      },
     );
   }
 
@@ -322,7 +371,7 @@ export class ReservationsComponent implements OnInit {
             }
           },
         });
-      }
+      },
     );
   }
   deletereservation(id: String) {
@@ -414,7 +463,7 @@ export class ReservationsComponent implements OnInit {
                 }
               },
             });
-          }
+          },
         );
       }
     });
@@ -422,23 +471,23 @@ export class ReservationsComponent implements OnInit {
 
   addreservation() {
     const clientUsers = this.Listusers.filter(
-      (user: any) => user.role && user.role.toUpperCase() === 'CLIENT'
+      (user: any) => user.role && user.role.toUpperCase() === 'CLIENT',
     );
 
     const userOptions = clientUsers
       .map(
         (user: any) =>
-          `<option value="${user.id}">${user.username} (${user.email})</option>`
+          `<option value="${user.id}">${user.username} (${user.email})</option>`,
       )
       .join('');
 
     const voyageOptions = this.Listvoyage.map(
       (voyage: any) =>
-        `<option value="${voyage.id}">${voyage.name} - ${voyage.date}</option>`
+        `<option value="${voyage.id}">${voyage.name} - ${voyage.date}</option>`,
     ).join('');
 
     const categoryOptions = this.Listcategory.map(
-      (cat: any) => `<option value="${cat.id}">${cat.name}</option>`
+      (cat: any) => `<option value="${cat.id}">${cat.name}</option>`,
     ).join('');
 
     Swal.fire({
@@ -573,7 +622,7 @@ export class ReservationsComponent implements OnInit {
         const nbPersonnes = parseInt(nombrePersonnes);
         if (nbPersonnes < 1) {
           Swal.showValidationMessage(
-            'Le nombre de personnes doit être supérieur à 0'
+            'Le nombre de personnes doit être supérieur à 0',
           );
           return null;
         }
@@ -594,7 +643,7 @@ export class ReservationsComponent implements OnInit {
         formData.append('date', result.value.date);
         formData.append(
           'nombrePersonnes',
-          result.value.nombrePersonnes.toString()
+          result.value.nombrePersonnes.toString(),
         );
         formData.append('paid', result.value.paid);
         formData.append('confirm', result.value.confirm);
@@ -604,16 +653,16 @@ export class ReservationsComponent implements OnInit {
             formData,
             result.value.iduser,
             result.value.idvoyage,
-            result.value.idcategory
+            result.value.idcategory,
           )
           .subscribe(
             (res: any) => {
               this.getreservation();
               const selectedUser = this.Listusers.find(
-                (u: any) => u.id == result.value.iduser
+                (u: any) => u.id == result.value.iduser,
               );
               const selectedVoyage = this.Listvoyage.find(
-                (v: any) => v.id == result.value.idvoyage
+                (v: any) => v.id == result.value.idvoyage,
               );
 
               Swal.fire({
@@ -676,7 +725,7 @@ export class ReservationsComponent implements OnInit {
                   }
                 },
               });
-            }
+            },
           );
       }
     });
@@ -690,7 +739,7 @@ export class ReservationsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   }
 
@@ -702,7 +751,7 @@ export class ReservationsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   }
 
@@ -714,7 +763,7 @@ export class ReservationsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   }
 }
