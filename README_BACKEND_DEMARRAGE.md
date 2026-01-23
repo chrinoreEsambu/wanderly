@@ -67,4 +67,9 @@ mvn org.springframework.boot:spring-boot-maven-plugin:run
 
 ```bash
 cd backendN && mvn org.springframework.boot:spring-boot-maven-plugin:run
+
+ou
+
+mvn spring-boot:run
+
 ```
